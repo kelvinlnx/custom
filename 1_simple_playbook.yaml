@@ -1,0 +1,12 @@
+---
+- name: simple playbook
+  hosts: webservers
+  tasks:
+    - name: install a webserver
+
+    - name: publish website
+
+    - name: start webserver
+
+    - name: open firewall port
+...

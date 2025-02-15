@@ -9,4 +9,9 @@
     - name: start webserver
 
     - name: open firewall port
+
+- name: test website
+  hosts: test_client
+  tasks:
+    - name: test website
 ...

@@ -1,13 +1,13 @@
 ---
 ansible-navigator:
   execution-environment:
-    enabled: True
+    enabled: False
 #    environment-variables:
 #      set:
 #        ANSIBLE_STDOUT_CALLBACK: yaml
-    image: ee-supported-rhel8:latest
-    pull:
-      policy: missing
+#    image: ee-supported-rhel8:latest
+#    pull:
+#      policy: missing
   logging:
     append: true
     file: ./logs/ansible-navigator.log

@@ -1,0 +1,35 @@
+---
+- name: Using facts
+  hosts: servera.lab.example.com
+  tasks:
+    - name: What is my hostname?
+      debug:
+        msg: My hostname is {{ ansible_facts.fqdn }}     # or {{ ansible_facts['fqdn'] }}
+
+- name: Getting facts from another machine
+  hosts: servera.lab.example.com
+  gather_facts: false
+  tasks:
+    - name: collect facts from serverb          # this is a very bad method
+      setup:
+      delegate_to: serverb.lab.example.com
+
+    - name: display result
+      debug:
+        msg:
+          - serverb hostname is {{ ansible_facts.fqdn }}
+          - now how do I get servera hostname?          # reason why play is badly written
+
+- name: Best method of collecting facts from another machine
+  hosts: servera.lab.example.com
+  tasks:
+    - name: delegate facts correctly
+      setup:
+      delegate_to: serverb.lab.example.com
+      delegate_facts: true
+
+    - name: show the result
+      debug:
+        msg:
+          - servera hostname is {{ ansible_facts.fqdn }}
+          - serverb hostname is {{ GUESS_WHAT_IS_THIS }}   # guess the answer after instructor teach hostvars magic variable

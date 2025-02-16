@@ -1,17 +1,27 @@
 ---
-- name: simple playbook
+- name: basic playbook
   hosts: webservers
   tasks:
     - name: install a webserver
+      debug:
+        msg: install
 
     - name: publish website
+      debug:
+        msg: deploy
 
     - name: start webserver
+      debug:
+        msg: start
 
     - name: open firewall port
+      debug:
+        msg: open
 
 - name: test website
-  hosts: test_client
+  hosts: clients
   tasks:
     - name: test website
+      debug:
+        msg: test
 ...

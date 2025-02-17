@@ -166,7 +166,7 @@ Command Line Syntax
       # ansible-galaxy collection init mycollection
       # ansible-galaxy role init myrole
 
-  Navigator   # DO374
+  Navigator
   ---------
       ansible-navigator [--help]
       ansible-navigator run [--hp]

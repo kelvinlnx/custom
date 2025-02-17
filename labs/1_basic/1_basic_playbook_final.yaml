@@ -1,34 +1,38 @@
 ---
-- name: variables playbook
+- name: basic playbook
   hosts: webservers
+  gather_facts: false
+  become: true
   tasks:
     - name: install a webserver
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: httpd
         state: latest
 
     - name: publish website
       ansible.builtin.copy:
-        content: Welcome to {{ inventory_hostname }}
+        content: Welcome to my server
         dest: /var/www/html/index.html
 
     - name: start webserver
       ansible.builtin.service:
         name: httpd
         state: started
+        enabled: true
 
     - name: open firewall port
       ansible.posix.firewalld:
         service: http
+        permanent: true
         state: enabled
-        permanent: yes
         immediate: true
 
 - name: test website
   hosts: clients
+  gather_facts: false
   tasks:
     - name: test website
       ansible.builtin.uri:
-        url: http://servera/
+        url: http://servera
         status_code: 200
 ...

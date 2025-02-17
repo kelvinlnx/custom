@@ -1,4 +1,11 @@
 ---
+# Learning points:
+#   - facts are a form of inventory/host variables
+#   - declare custom facts in task
+#   - use 'ansible clients -m setup' to check all fields provided by setup module
+#   - task delegation
+#   - facts delegation
+#   
 - name: Using facts
   hosts: servera.lab.example.com
   tasks:

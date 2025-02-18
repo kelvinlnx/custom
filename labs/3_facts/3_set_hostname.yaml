@@ -8,6 +8,7 @@
       ansible.builtin.hostname:
         name: '{{ inventory_hostname + ".my" }}'
         use: systemd
+      become: true
 
     - name: verify hostname
       ansible.builtin.shell: hostname; cat /etc/hostname

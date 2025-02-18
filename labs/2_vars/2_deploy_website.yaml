@@ -3,6 +3,7 @@
   hosts:
     - webservers
     - dbservers
+  become: true
   tasks:
     - name: install server
       ansible.builtin.dnf:

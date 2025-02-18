@@ -23,7 +23,7 @@
     # multiple conditions
     - name: display message if servera in webservers group and kernel is 5.14
       debug:
-        msg: {{ ansible_facts.fqdn }}  belongs to webservers group and kernel is 5.14
+        msg: "{{ ansible_facts.fqdn }}  belongs to webservers group and kernel is 5.14"
       when:
         - inventory_hostname in groups['webservers']
         - "'5.14' in sh_result.stdout"
@@ -31,6 +31,6 @@
     # you can use registered variable immediately in task          
     - name: change failure condition
       command: grep roots /etc/passwd
-      failed_when: '"No such file" in cmd_result.stdout'
+      failed_when: '"No such file" in cmd_result.stderr'
       changed_when: false
       register: cmd_result

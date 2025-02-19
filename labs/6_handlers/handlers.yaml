@@ -4,7 +4,7 @@
 - name: testing execution order
   hosts: webservers
   gather_facts: false
-  force_handlers: true
+#  force_handlers: true
   tasks:
     - name: T1
       debug:

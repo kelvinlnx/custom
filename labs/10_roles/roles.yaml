@@ -1,5 +1,5 @@
 - name: Testing Simple Playbook
-  hosts: servera
+  hosts: clients
   gather_facts: true
   vars:
     public_username: julie

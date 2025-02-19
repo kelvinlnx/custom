@@ -455,3 +455,29 @@ TIPS:
   Variables
   =========
     boolean & floating point numbers doesn't need to be quoted.
+
+Jinja2
+======
+  Delimeters:
+    {% ... %} - statements
+    {{ ... }} - expressions to generate as output
+    {# ... #} - comments not included in output
+
+  Conditional Statements:
+    {% if CONDITION %}
+    ...
+    {% else %}
+    ...
+    {% endif %}
+
+  Loops:
+    {% for VAR in LIST %}
+    {% if CONDITION %}
+    ...
+    {% endif %}
+    {% endfor %}
+
+    {% for VAR in LIST [if CONDITION] %}
+    ...
+    {% endfor %}
+

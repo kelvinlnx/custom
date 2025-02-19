@@ -1,0 +1,7 @@
+To use this lab, do this:
+1. create a project dir
+   mkdir proj; cd proj
+2. git clone https://github.com/kelvinlnx/custom
+3. try the labs 1 by 1
+   cp -r custom/labs/<LAB_DIR>/* .
+4. try the lab

@@ -6,14 +6,15 @@
       - albert
       - julie
       - muniandy
+    dest_file: /tmp/config.cfg
   tasks:
     - name: copy template to /tmp/config.cfg
       template:
         src: templates/config.cfg.j2
-        dest: /tmp/config.cfg
+        dest: "{{ dest_file }}"
 
     - name: get contents of file
-      command: cat /tmp/config.cfg
+      command: cat {{ dest_file }}
       register: file_content
 
     - name: display contents

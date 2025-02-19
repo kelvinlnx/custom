@@ -1,0 +1,15 @@
+---
+- name: testing usage of in with list
+  hosts: localhost
+  vars:
+    data:
+      - 123
+      - hello world
+      - def
+    query: ell
+    data2: I have learned how to program the hello world sample
+  tasks:
+    - name: is {{ query }} in the data list
+      debug:
+        msg: Yes
+      when: query in data2

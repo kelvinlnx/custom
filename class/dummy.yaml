@@ -1,0 +1,7 @@
+- name: testing verbosity
+  hosts: localhost
+  tasks:
+    - name: hi
+      debug:
+        msg: hi
+        verbosity: 2

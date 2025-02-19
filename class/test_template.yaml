@@ -1,0 +1,10 @@
+---
+- name: testing templates
+  hosts: clients
+  vars:
+    some_data: whatever la
+  tasks:
+    - name: copy file over
+      ansible.builtin.template:
+        src: data_file.j2
+        dest: /tmp/some_file

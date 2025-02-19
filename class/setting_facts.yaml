@@ -1,0 +1,24 @@
+---
+- name: dynamically setting facts
+  hosts: webservers
+  tasks:
+    - name: creating custom facts
+      set_fact:
+        value1: 123
+        value2: Hello World
+
+    - name: value1 is
+      debug:
+        msg: value1 is {{ value1 }}
+
+    - name: creating custom facts only for servera
+      set_fact:
+        value1: "{{ (value1 + 2) * 3 }}"
+      when: inventory_hostname == 'servera.lab.example.com'
+
+    - name: display facts
+      debug:
+        msg:
+          - value1 is {{ value1 }}
+          - value2 is {{ value2 }}
+

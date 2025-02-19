@@ -1,0 +1,15 @@
+---
+# Learning points:
+#   - inventory(host) variables to simplify group management
+#
+- name: inventory variables
+  hosts: webservers
+  gather_facts: false
+  tasks:
+    - name: Webserver software information
+      debug:
+        msg:
+          - 'package name: {{ pkg_name }}'
+          - 'service name: {{ svc_name }}'
+          
+

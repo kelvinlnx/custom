@@ -1,0 +1,34 @@
+---
+- name: Testing variables
+  hosts: clients
+  vars:
+    my_var: 123
+  tasks:
+    - name: Task 1 my_var is {{ my_var }}
+      debug:
+        msg: my_var={{ my_var }}
+
+    - name: task level variable
+      vars:
+        my_var: hi there
+      debug:
+        msg: my_var is now {{ my_var }}
+
+    - name: Guess what is my_var?
+      debug:
+        msg: '{{ my_var }} is the answer'
+
+    - name: register result of task
+      command: free -h
+      register: cmd_result
+      changed_when: false
+
+#    - name: display result of command execution
+#      debug:
+#        var: cmd_result
+
+    - name: make use of result
+      debug:
+        msg:
+          - second line output was:
+          - '{{ cmd_result.stdout_lines[1] }}'

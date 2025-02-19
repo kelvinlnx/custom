@@ -1,0 +1,5 @@
+{# This line will never appear in the destination file #}
+
+Machine name is: {{ ansible_facts.fqdn }}
+Machine IP: {{ ansible_facts.default_ipv4.address }}
+Custom data: {{ some_data }}

@@ -1,8 +1,0 @@
-[webservers]
-server[a:b].lab.example.com
-
-[dbservers]
-serverc.lab.example.com
-
-[clients]
-serverd.lab.example.com

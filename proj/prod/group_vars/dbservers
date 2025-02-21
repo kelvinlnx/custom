@@ -1,3 +1,0 @@
-svc_name: mariadb
-pkg_name: mariadb-server
-port_name: mysql

@@ -1,3 +1,0 @@
-pkg_name: httpd
-svc_name: httpd
-port_name: http

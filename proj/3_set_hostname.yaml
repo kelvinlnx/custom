@@ -1,0 +1,19 @@
+---
+# this playbook sets the hostname of the servers
+#
+- name: setting hostname
+  hosts: serverc.lab.example.com
+  tasks:
+    - name: set hostname
+      ansible.builtin.hostname:
+        name: '{{ inventory_hostname + ".my" }}'
+        use: systemd
+      become: true
+
+    - name: verify hostname
+      ansible.builtin.shell: hostname; cat /etc/hostname
+      register: sh_result
+
+    - name: display result
+      ansible.builtin.debug: 
+        var: sh_result

@@ -2,7 +2,7 @@
 
 dest="./class"
 
-menu=(basic vars facts secret loops_n_conditions handlers error_handling jinja2 external_tasks roles)
+menu=(basic vars facts secrets loops_n_conditions handlers error_handling jinja2 external_tasks roles)
 
 choice=0
 while [ "$choice" != 12 ]; do

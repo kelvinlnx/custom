@@ -1,7 +1,0 @@
-- name: testing verbosity
-  hosts: "{{ my_host_list | default('localhost') }}"
-  tasks:
-    - name: hi
-      debug:
-        msg: hi
-        verbosity: 2

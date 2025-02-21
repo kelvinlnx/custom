@@ -1,7 +1,12 @@
 - name: testing verbosity
-  hosts: localhost
+  hosts: "{{ my_host_list | default('serverd.lab.example.com') }}" 
+  gather_facts: false
   tasks:
     - name: hi
       debug:
         msg: hi
         verbosity: 2
+        
+    - name: using facts
+      debug:
+        msg: hosname is {{ ansible_fqdn }}

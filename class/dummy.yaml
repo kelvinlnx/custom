@@ -1,5 +1,5 @@
 - name: testing verbosity
-  hosts: localhost
+  hosts: "{{ my_host_list | default('localhost') }}"
   tasks:
     - name: hi
       debug:

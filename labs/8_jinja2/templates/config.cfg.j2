@@ -3,5 +3,9 @@ hosname = {{ ansible_fqdn }}
 
 [users]
 user = {%- for NAMES in user_list -%}
+{%- if NAMES == 'albert' -%}
+ALBERT,
+{%- else -%}
 {{ NAMES }},
+{%- endif -%}
 {%- endfor -%}

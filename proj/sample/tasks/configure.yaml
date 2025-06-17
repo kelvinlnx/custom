@@ -1,0 +1,29 @@
+- name: Create document root directory
+  file:
+    path: "{{ doc_root }}"
+    state: directory
+    owner: "{{ app_owner }}"
+    group: "{{ app_group }}"
+    mode: "{{ dir_perm }}"
+
+- name: Deploy index page
+  template:
+    src: "{{ index_template }}"
+    dest: "{{ doc_root }}/index.html"
+    owner: "{{ app_owner }}"
+    group: "{{ app_group }}"
+  notify: restart apache
+
+- name: Deploy virtual host config
+  template:
+    src: "{{ vhost_template }}"
+    dest: "/etc/httpd/conf.d/{{ app_name }}.conf"
+  notify: restart apache
+
+- name: Apply SELinux policy if semanage available and enforcing
+  command: semanage fcontext -a -t httpd_sys_content_t "{{ doc_root }}(/.*)?"
+  when:
+    - ansible_selinux is defined
+    - ansible_selinux.status == 'enforcing'
+  ignore_errors: true
+

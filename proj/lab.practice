@@ -1,0 +1,34 @@
+write a playbook that will be executed on clients (serverd.lab.example.com).
+	a) collect facts from servera and serverb
+	b) display the ip address of servera, serverb and serverd in a single task
+
+[webservers]
+servera.lab.example.com
+serverb.lab.example.com
+
+[clients]
+serverd.lab.example.com
+
+- name: Playname
+  hosts: clients
+  tasks:
+    - name: display serverd hostname on servera
+      shell: echo {{ ansible_facts['fqdn'] }} > /tmp/dummy
+      delegate_to: servera.lab.example.com
+
+    - name: gather facts for servera.lab.example.com
+      setup:
+      delegate_to: servera.lab.example.com
+      delegate_facts: true
+
+    - name: gather facts for serverb.lab.example.com
+      setup:
+      delegate_to: serverb.lab.example.com
+      delegate_facts: true
+
+    - name: display result
+      debug:
+        msg:
+          - servera ip is {{ hostvars['servera.lab.example.com']['ansible_facts']['default_ipv4']['address']
+          - serverb ip is {{ hostvars['serverb.lab.example.com']['ansible_facts']['default_ipv4']['address']
+          - serverd ip is {{ ansible_facts['default_ipv4']['address'] }}

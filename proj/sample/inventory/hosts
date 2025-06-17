@@ -1,0 +1,5 @@
+[webservers]
+server[a:b].lab.example.com
+
+[certserver]
+serverc.lab.example.com

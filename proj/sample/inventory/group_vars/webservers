@@ -1,0 +1,15 @@
+doc_root: "/var/www/{{ app_name }}"
+firewall_ports:
+  - 80
+  - 443
+ssl_cert_path: "/etc/pki/tls/certs/{{ inventory_hostname }}.crt"
+ssl_key_path: "/etc/pki/tls/private/{{ inventory_hostname }}.key"
+required_packages:
+  - httpd
+  - mod_ssl
+
+index_template: "index.html.j2"
+vhost_template: "vhost.conf.j2"
+app_owner: apache
+app_group: apache
+

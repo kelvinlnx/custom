@@ -1,0 +1,21 @@
+- name: testing custom facts
+  hosts: servera.lab.example.com
+  tasks:
+    - name: create a variable value1
+      set_fact:
+        value1: 123
+        value2: 456
+
+    - name: display value1
+      debug:
+        var: value1
+
+    - name: changing value1
+      set_fact:
+        value1: "{{ 'Hello World: ' + (value1 * 2)|string }}"
+
+    - name: display result
+      debug:
+        msg:
+          - value1 is {{ value1 }}
+          - value2 is {{ value2 }}

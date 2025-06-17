@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dest="./class"
+dest="./proj"
 
 menu=(basic vars facts secrets loops_n_conditions handlers error_handling jinja2 external_tasks roles)
 

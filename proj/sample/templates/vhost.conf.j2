@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot {{ doc_root }}
+    ErrorLog logs/{{ app_name }}_error.log
+    CustomLog logs/{{ app_name }}_access.log combined
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerAdmin webmaster@localhost
+    DocumentRoot {{ doc_root }}
+
+    SSLEngine on
+    SSLCertificateFile {{ ssl_cert_path }}
+    SSLCertificateKeyFile {{ ssl_key_path }}
+
+    ErrorLog logs/{{ app_name }}_ssl_error.log
+    CustomLog logs/{{ app_name }}_ssl_access.log combined
+</VirtualHost>
+

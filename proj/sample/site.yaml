@@ -1,0 +1,53 @@
+---
+# site.yaml
+- name: Deploy Secure Web App
+  hosts: webservers
+  become: true
+  vars_files:
+    - vars/webapp.yaml
+    - vars/security.yaml
+  tasks:
+    - name: Fetch SSL cert from secrets server
+      slurp:
+        src: "/srv/certs/{{ inventory_hostname }}.crt"
+      delegate_to: serverc.lab.example.com
+      register: ssl_cert_raw
+      run_once: true
+
+    - name: Write SSL cert to target host
+      copy:
+        content: "{{ ssl_cert_raw.content | b64decode }}"
+        dest: "{{ ssl_cert_path }}"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Fetch SSL key from secrets server
+      slurp:
+        src: "/srv/certs/{{ inventory_hostname }}.key"
+      delegate_to: serverc.lab.example.com
+      register: ssl_key_raw
+      run_once: true
+
+    - name: Write SSL key to target host
+      copy:
+        content: "{{ ssl_key_raw.content | b64decode }}"
+        dest: "{{ ssl_key_path }}"
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: Include install tasks
+      import_tasks: tasks/install.yaml
+
+    - name: Include configure tasks
+      import_tasks: tasks/configure.yaml
+
+    - name: Include firewall tasks
+      import_tasks: tasks/firewall.yaml
+
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted

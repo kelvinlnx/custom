@@ -1,0 +1,7 @@
+- name: testing magic variables
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: display variable
+      ansible.builtin.debug:
+        var: inventory_hostname

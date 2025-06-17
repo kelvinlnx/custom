@@ -1,0 +1,28 @@
+- name: Install required packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ required_packages }}"
+
+- name: Ensure httpd service is enabled and started
+  block:
+    - name: Start and enable Apache service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+  rescue:
+    - name: Attempt to reinstall httpd and restart
+      yum:
+        name: httpd
+        state: latest
+    - name: Retry starting Apache service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+  always:
+    - name: Confirm system is responsive
+      command: systemctl is-system-running
+      changed_when: false
+

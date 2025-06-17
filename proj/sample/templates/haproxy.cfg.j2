@@ -1,0 +1,22 @@
+global
+    log /dev/log local0
+    maxconn {{ haproxy_maxconn }}
+    user haproxy
+    group haproxy
+
+defaults
+    mode http
+    timeout connect 5000ms
+    timeout client {{ timeout_client }}ms
+    timeout server {{ timeout_server }}ms
+
+frontend http_front
+    bind *:80
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+    option forwardfor
+    {% for host in groups['webservers'] %}
+    server {{ hostvars[host].ansible_hostname }} {{ hostvars[host].ansible_default_ipv4.address }}:{{ http_port }} check
+    {% endfor %}

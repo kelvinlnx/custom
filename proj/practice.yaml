@@ -1,0 +1,19 @@
+- name: facts delegation with loop
+  hosts: clients
+  tasks:
+    - name: display serverd hostname on servera
+      shell: echo {{ ansible_facts['fqdn'] }} > /tmp/dummy
+      delegate_to: servera.lab.example.com
+
+    - name: gather facts from webservers
+      setup:
+      delegate_to: "{{ item }}"
+      delegate_facts: true
+      loop: "{{ groups['webservers'] }}"
+
+    - name: display result
+      debug:
+        msg: >
+          {{ hostvars[item].ansible_facts.fqdn }} ip is
+          {{ hostvars[item].ansible_facts.default_ipv4.address }}
+      loop: "{{ groups['webservers'] }}" 

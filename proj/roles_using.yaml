@@ -1,0 +1,4 @@
+- name: calling simple role
+  hosts: webservers
+  roles:
+    - simple

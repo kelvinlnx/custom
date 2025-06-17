@@ -1,0 +1,14 @@
+- name: testing simple conditions
+  hosts: all
+  tasks:
+    - name: only run on webservers
+      debug:
+        msg: Task 1
+      when: inventory_hostname in groups['webservers']
+
+    - name: test if package ansible is installed
+      command: rpm -q bash
+      failed_when: false
+      changed_when: '"not" in cmd_result.stdout'
+      register: cmd_result
+      when: inventory_hostname == 'servera.lab.example.com'

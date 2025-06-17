@@ -1,0 +1,6 @@
+- name: testing simple facts
+  hosts: webservers
+  tasks:
+    - name: display hostvars
+      debug:
+        var: hostvars

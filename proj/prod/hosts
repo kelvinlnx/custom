@@ -1,3 +1,5 @@
+server[e:f].lab.example.com
+
 [webservers]
 server[a:b].lab.example.com
 

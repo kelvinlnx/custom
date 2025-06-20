@@ -1,0 +1,11 @@
+- name: testing lookup
+  hosts: localhost
+  vars:
+    somedata: abc
+    testdata: hello world
+    search_item: test
+  tasks:
+    - name: Display the value of a variable whose name is from another variable
+      debug:
+        msg: your data is {{ lookup('vars', search_item + 'data') }}
+

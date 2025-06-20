@@ -1,0 +1,16 @@
+- name: adding users
+  hosts: "{{ user_hosts | default('servera.lab.example.com') }}"
+  vars:
+    user_list:
+      - name: julie
+      - name: albert
+        shell: /bin/ksh
+      - name: mike
+        shell: /bin/bash
+  tasks:
+    - name: adding user
+      user:
+        name: "{{ item.name }}"
+        shell: "{{ item.shell | default(omit) }}"
+      become: true
+      loop: "{{ user_list }}"

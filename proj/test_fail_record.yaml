@@ -1,0 +1,33 @@
+- name: testing failure node names
+  hosts:
+    - webservers
+    - dbservers
+  tasks:
+    - block:
+        - name: create file on record server
+          file:
+            path: /tmp/dummy.file
+            state: touch
+    
+        - name: record name on record server
+          lineinfile:
+            path: /tmp/dummy.file
+            line: '{{ inventory_hostname }}'
+      delegate_to: serverf.lab.example.com
+
+    - name: T2
+      debug:
+        msg: T2
+
+    - name: T3
+      debug:
+        msg: Task 3
+      failed_when: inventory_hostname in 'serverb.lab.example.com'
+
+    - name: remove my hostname from record server
+      lineinfile:
+        path: /tmp/dummy.file
+        line: '{{ inventory_hostname }}'
+        state: absent
+      delegate_to: serverf.lab.example.com
+

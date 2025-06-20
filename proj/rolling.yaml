@@ -1,9 +1,16 @@
 - name: testing order
   hosts: server*
+  serial:
+    - 1
+    - 50%
+    - 100%
+  order: sorted
+  max_fail_percentage: 40%
   tasks:
     - name: T1
       debug:
         msg: Task 1
+      failed_when: inventory_hostname == 'serverc.lab.example.com'
 
     - name: T2
       command: sleep 5
